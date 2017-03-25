@@ -80,7 +80,7 @@ for i in glob.glob("Test/*.jpg"):
 
 ans=[]
 detectors=[]
-f = open('test.txt','a+')
+# f = open('test.txt','a+')
 for ima in filets :
     im = imread(ima, as_grey=True)
     min_wdw_sz = (63, 57)
@@ -136,13 +136,14 @@ for ima in filets :
 #     cv2.imwrite('bound/'+str(1)+'.jpg', im)
     end = time.time()
     print(end - start)
-    print(ima)
-    print (detections)
+    
+    # print (detections)
     p=nms(detections)
     detectors.append((ima,p))
     ans.append((ima,p[0]))
-    
-    f.write(ima)
-    f.write(p[0])
-    f.write("\n")
-f.close()
+    joblib.dump(ans,'dump1')
+    print(ima)
+    # f.write(ima)
+    # f.write(p[0])
+    # f.write("\n")
+# f.close()
