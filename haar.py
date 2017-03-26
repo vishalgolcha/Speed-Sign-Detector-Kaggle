@@ -83,7 +83,7 @@ detectors=[]
 # f = open('test.txt','a+')
 for ima in filets :
     im = imread(ima, as_grey=True)
-    im = cv2.resize(im,(im.shape[0]/2,im.shape[1]/2))
+    im = cv2.resize(im,(int(im.shape[0]/2),int(im.shape[1]/2)))
 
     min_wdw_sz = (63, 57)
     step_size = (10, 10)
