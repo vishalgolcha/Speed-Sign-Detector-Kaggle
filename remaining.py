@@ -21,7 +21,7 @@ from skimage.transform import pyramid_gaussian
 from skimage.io import imread
 import cv2
 
-clf = joblib.load('models/halfmodel')
+clf = joblib.load('models/dump2')
 
 def sliding_window(image, window_size, step_size):
     for y in range(0, image.shape[0], step_size[1]):
@@ -78,15 +78,17 @@ filets=[]
 for i in glob.glob("Test/*.jpg"):
     filets.append(i)
 
+filets=joblib.load('remains')
 ans=[]
 detectors=[]
 # f = open('test.txt','a+')
+
 for ima in filets :
     im = imread(ima, as_grey=True)
-    im = cv2.resize(im,(int(im.shape[0]/2),int(im.shape[1]/2)))
+    im = cv2.resize(im,(im.shape[0]/2,im.shape[1]/2))
 
-    min_wdw_sz = (32, 28)
-    step_size = (5, 5)
+    min_wdw_sz = (63, 57)
+    step_size = (10, 10)
     downscale = 2
     visualize_det =False
 
@@ -142,8 +144,14 @@ for ima in filets :
     # print (detections)
     p=nms(detections)
     detectors.append((ima,p))
-    ans.append((ima,p[0]))
-    joblib.dump(ans,'halfdump')
+    
+    if p!=[] :
+        ans.append((ima,p[0]))
+    else :
+        ans.append((ima,''))
+
+    joblib.dump(ans,'dump3')
+    
     print(ima)
     # f.write(ima)
     # f.write(p[0])
