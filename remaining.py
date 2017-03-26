@@ -150,7 +150,7 @@ for ima in filets :
     else :
         ans.append((ima,''))
 
-    joblib.dump(ans,'dump1')
+    joblib.dump(ans,'dump3')
     
     print(ima)
     # f.write(ima)
